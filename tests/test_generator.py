@@ -8,7 +8,6 @@ test_generator
 Tests for `generator` module.
 """
 
-import inspect
 import itertools
 try:
     import unittest2 as unittest
@@ -75,18 +74,19 @@ class TestGenerator(AssertCalledWithInputs, unittest.TestCase):
         self.generated = generator(self.klass)
 
     def test_generator_naming(self):
-        for name, method in inspect.getmembers(self.generated, predicate=inspect.ismethod):
-            self.assertTrue(name.startswith('test_method'))
+        tests = unittest.TestLoader().getTestCaseNames(self.generated)
+        for test in tests:
+            self.assertTrue(test.startswith('test_method'))
 
     def test_generator_count(self):
-        example = self.generated()
-        methods = [method for name, method in inspect.getmembers(example, predicate=inspect.ismethod)]
-        self.assertEqual(len(methods), len(self.inputs))
+        tests = unittest.TestLoader().getTestCaseNames(self.generated)
+        self.assertEqual(len(tests), len(self.inputs))
 
     def test_generator_methods(self):
+        tests = unittest.TestLoader().getTestCaseNames(self.generated)
         example = self.generated()
-        methods = [method for name, method in inspect.getmembers(example, predicate=inspect.ismethod)]
-        for method in methods:
+        for test in tests:
+            method = getattr(example, test)
             method()
         self.assertEqual(self.spy.call_count, len(self.inputs))
         self.assert_called_with_inputs(
