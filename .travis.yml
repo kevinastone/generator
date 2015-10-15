@@ -4,12 +4,17 @@
 language: python
 
 env:
-  - TOXENV=py35
   - TOXENV=py34
   - TOXENV=py33
   - TOXENV=py27
   - TOXENV=py26
-  - TOXENV=pypy
+
+# Need to work around the lack of default python 3.5
+matrix:
+  include:
+    - python: 3.5
+      env:
+      - TOXENV=py35
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -U tox

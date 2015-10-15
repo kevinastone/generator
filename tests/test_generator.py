@@ -10,7 +10,10 @@ Tests for `generator` module.
 
 import inspect
 import itertools
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 import mock
 

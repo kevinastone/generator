@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
 
 
 try:
@@ -22,6 +23,12 @@ test_requirements = [
     'nose',
     'mock',
 ]
+
+
+if sys.version_info < (2, 7):
+    # py26 needs unittest2 backport
+    test_requirements.append('unittest2')
+
 
 setup(
     name='generator',

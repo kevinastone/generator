@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import inspect
 
-from six import with_metaclass
+from six import add_metaclass
 
 from .version import __version__    # noqa
 
@@ -56,5 +56,6 @@ class GeneratorTestCaseMeta(type):
         return generator(cls)
 
 
-class GeneratorTestCase(object, with_metaclass(GeneratorTestCaseMeta)):
+@add_metaclass(GeneratorTestCaseMeta)
+class GeneratorTestCase(object):
     generate = staticmethod(generate)
