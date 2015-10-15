@@ -17,7 +17,7 @@ except ImportError:
 
 import mock
 
-from generator import generate, generator, GeneratorTestCase, GeneratorTest
+from generator import generate, generator, GeneratorMixin, GeneratorTest
 
 
 class AssertCalledWithInputs(object):
@@ -95,13 +95,13 @@ class TestGenerator(AssertCalledWithInputs, unittest.TestCase):
         )
 
 
-class TestGeneratorTestCase(AssertCalledWithInputs, unittest.TestCase):
+class TestGeneratorMixin(AssertCalledWithInputs, unittest.TestCase):
     def setUp(self):
         self.inputs = 1, 2, 3
         self.spy = mock.Mock()
         self.other_spy = mock.Mock()
 
-        class Example(GeneratorTestCase, unittest.TestCase):
+        class Example(GeneratorMixin, unittest.TestCase):
             @generate(*self.inputs)
             def test_method(me, arg):
                 self.spy(arg)

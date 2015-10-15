@@ -50,12 +50,12 @@ def generator(klass):
     return klass
 
 
-class GeneratorTestCaseMeta(type):
+class GeneratorMeta(type):
     def __new__(metaclass, name, bases, attributes):
-        cls = super(GeneratorTestCaseMeta, metaclass).__new__(metaclass, name, bases, attributes)
+        cls = super(GeneratorMeta, metaclass).__new__(metaclass, name, bases, attributes)
         return generator(cls)
 
 
-@add_metaclass(GeneratorTestCaseMeta)
-class GeneratorTestCase(object):
+@add_metaclass(GeneratorMeta)
+class GeneratorMixin(object):
     generate = staticmethod(generate)
