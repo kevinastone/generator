@@ -15,6 +15,14 @@ Generator is a helper for generating test methods for nose while still using uni
 * Documentation: https://generator.readthedocs.org.
 
 
+Installation
+------------
+
+::
+
+    pip install test-generator
+
+
 Introduction
 ------------
 
