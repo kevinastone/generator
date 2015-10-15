@@ -41,7 +41,7 @@ class TestGenerateDecorator(AssertCalledWithInputs, unittest.TestCase):
         self.assertEqual(self.spy.call_count, len(self.inputs))
         self.assert_called_with_inputs(
             self.spy,
-            itertools.izip(itertools.repeat(self.test_case), self.inputs)
+            zip(itertools.repeat(self.test_case), self.inputs)
         )
 
     def test_decorated_iterator(self):
@@ -54,7 +54,7 @@ class TestGenerateDecorator(AssertCalledWithInputs, unittest.TestCase):
         self.assertEqual(self.spy.call_count, len(self.inputs))
         self.assert_called_with_inputs(
             self.spy,
-            itertools.izip(itertools.repeat(self.test_case), self.inputs)
+            zip(itertools.repeat(self.test_case), self.inputs)
         )
 
 
@@ -76,7 +76,8 @@ class TestGenerator(AssertCalledWithInputs, unittest.TestCase):
             self.assertTrue(name.startswith('test_method'))
 
     def test_generator_count(self):
-        methods = [method for name, method in inspect.getmembers(self.generated, predicate=inspect.ismethod)]
+        example = self.generated()
+        methods = [method for name, method in inspect.getmembers(example, predicate=inspect.ismethod)]
         self.assertEqual(len(methods), len(self.inputs))
 
     def test_generator_methods(self):
