@@ -32,7 +32,7 @@ if sys.version_info < (2, 7):
 
 setup(
     name='test-generator',
-    version='0.1.0',
+    version='0.1.1',
     description="Generator is a helper for generating test methods for nose while still using unittest",
     long_description=readme + '\n\n' + history,
     author="Kevin Stone",
