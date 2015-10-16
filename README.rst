@@ -30,7 +30,7 @@ Have you ever written tests that loop through a list of inputs to validate the f
 
 Something like?
 
-::
+.. code-block:: python
 
     from mything import thingy
 
@@ -53,7 +53,9 @@ test setUp or tearDown.  It also fails on the first input and you can't run a
 single test input, you have to run them all?  (Doesn't work well when each
 test is more complicated than this toy case).
 
-Instead, what if you wrote your test like::
+Instead, what if you wrote your test like:
+
+.. code-block:: python
 
     from generator import generator, generate
     from mything import thingy
@@ -65,7 +67,10 @@ Instead, what if you wrote your test like::
         def test_thingy(self, input):
             self.assertTrue(thingy(input))
 
-And when you run your tests, you see::
+
+And when you run your tests, you see:
+
+.. code-block:: shell
 
     ----------------------------------------------------------------------
     Ran 7 tests in 0.001s
@@ -87,7 +92,7 @@ Let's make sure our API client properly handles error conditions and raises a
 generic APIError under the conditions.  We'll use mock to patch out the actual
 API call to return our response.
 
-::
+.. code-block:: python
 
     import mock
     from generator import generator, generate
@@ -112,7 +117,7 @@ Let's make sure our API client properly handles error conditions and raises a
 generic APIError under the conditions.  We'll use mock to patch out the actual
 API call to return our response.
 
-::
+.. code-block:: python
 
     from generator import generator, generate
     from example.sanitize import strip_tags
