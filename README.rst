@@ -63,7 +63,7 @@ Instead, what if you wrote your test like:
     @generator
     class MyTestCase(unittest.TestCase):
 
-        @generate('a', 'b', 'cccc', 'ddd', 'eeeeee', 'f', 'g'):
+        @generate('a', 'b', 'cccc', 'ddd', 'eeeeee', 'f', 'g')
         def test_thingy(self, input):
             self.assertTrue(thingy(input))
 
