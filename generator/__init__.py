@@ -1,10 +1,15 @@
 from __future__ import absolute_import
 
+import functools
 import inspect
 
 from six import add_metaclass
 
+from .util import copy_attributes
 from .version import __version__    # noqa
+
+
+copy_attributes = functools.partial(copy_attributes, ignore_patterns=['__*', 'func_*'])
 
 
 class GeneratorTest(object):
@@ -17,6 +22,8 @@ class GeneratorTest(object):
             def test_arg(func, *arg):
                 def wrapper_func(test_case):
                     return func(test_case, *arg)
+                copy_attributes(self, wrapper_func)
+                copy_attributes(self.func, wrapper_func)
                 wrapper_func.__name__ = "{method}[{arg!r}]".format(method=func.__name__, arg=arg)
                 wrapper_func.__test__ = True
                 return wrapper_func
